@@ -1,0 +1,21 @@
+Oracle SQL Plus Database
+
+Buyer Table:
+	create table Buyer(Name varchar(50) not null,Address varchar(200) not null,ShopName varchar(50) not null,
+Username varchar(50) primary key,Password varchar(50) not null,ContactNumber number(15) not null,ShopType varchar(50));
+Seller Table:
+	create table Seller(Name varchar(50) not null,Address varchar(200)not null,Username varchar(50) primary key,
+Password varchar(50) not null,ContactNumber number(15) not null);
+Comments Table:
+	create table Comments(BuyerUsername varchar(50) not null,SellerUsername varchar(50) not null,remarks varchar(250) not null,
+foreign key (BuyerUsername) references Buyer(Username),foreign key (SellerUsername) references Seller(Username));
+Rating Table:
+	create table Rating(BuyerUsername varchar(50) not null,SellerUsername varchar(50) not null,Rating number not null,
+foreign key (BuyerUsername) references Buyer(Username),foreign key (SellerUsername) references Seller(Username),check(Rating<=5));
+Product Table:
+	create table Product(Username varchar(50) not null,ProductName varchar(50) not null,Ingredians varchar(250),
+about varchar(250),MRP number,price number not null,BestBefore number,Type varchar(50),
+foreign key(Username) references Seller(Username));
+
+/*note: while deleting the table delete from bottom(Product table) to up(Buyer table)*/
+/*Delete command : drop table table_name; */
